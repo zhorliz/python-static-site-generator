@@ -8,10 +8,7 @@ class Parser:
     extensions: List[str] = []
 
     def valid_extension(self, extension):
-        if extension in extensions:
-            return True
-        else:
-            return False
+        return extension in self.extensions
 
     def parse(self: Path, path: Path, source: Path, dest: Path):
         raise NotImplementedError
@@ -20,8 +17,8 @@ class Parser:
         with open(path, mode='rt', encoding='utf-8') as file:
             return file.read()
 
-    def write(self, path, dest, content):
-        ext = ".html"
+    def write(self, path, dest, content, ext=".html"):
+
         full_path = dest / path.with_suffix(ext).name
         with open(full_path, mode="wt", encoding='utf-8') as file:
             file.write(content)
